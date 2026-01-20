@@ -2,29 +2,63 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 
+const DEMO_URL = "#request-demo";
+const SPECIALIST_URL = "#contact-specialist";
+
 const DataStreamVisual = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Subtle grid pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+      
       {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] gradient-glow opacity-60" />
       
+      {/* Floating particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={`particle-${i}`}
+          className="absolute w-1 h-1 rounded-full bg-primary/20"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.1, 0.4, 0.1],
+          }}
+          transition={{
+            duration: 4 + Math.random() * 2,
+            delay: i * 0.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+      
       {/* Animated data lines */}
-      {[...Array(5)].map((_, i) => (
+      {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+          className="absolute h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
           style={{
-            top: `${20 + i * 15}%`,
+            top: `${30 + i * 20}%`,
             left: 0,
             right: 0,
           }}
           initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: [0, 0.6, 0], scaleX: [0, 1, 0] }}
+          animate={{ opacity: [0, 0.4, 0], scaleX: [0, 1, 0] }}
           transition={{
-            duration: 4,
-            delay: i * 0.5,
+            duration: 5,
+            delay: i * 0.8,
             repeat: Infinity,
-            repeatDelay: 2,
+            repeatDelay: 3,
           }}
         />
       ))}
@@ -77,13 +111,17 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="gradient-accent text-primary-foreground font-medium px-8 h-12 text-base shadow-glow">
-              Request a Demo
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button asChild size="lg" className="gradient-accent text-primary-foreground font-medium px-8 h-12 text-base shadow-glow">
+              <a href={DEMO_URL}>
+                Request a Demo
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
-            <Button variant="outline" size="lg" className="border-border hover:bg-secondary h-12 px-8 text-base">
-              <Play className="mr-2 h-4 w-4" />
-              Run a Sample Audit
+            <Button asChild variant="outline" size="lg" className="border-border hover:bg-secondary h-12 px-8 text-base">
+              <a href={DEMO_URL}>
+                <Play className="mr-2 h-4 w-4" />
+                Run a Sample Audit
+              </a>
             </Button>
           </motion.div>
 

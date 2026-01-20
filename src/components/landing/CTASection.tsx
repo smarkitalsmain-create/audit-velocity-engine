@@ -4,12 +4,15 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageSquare } from "lucide-react";
 
+const DEMO_URL = "#request-demo";
+const SPECIALIST_URL = "#contact-specialist";
+
 const CTASection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden">
+    <section id="request-demo" ref={ref} className="py-24 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 gradient-hero" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] gradient-glow opacity-40" />
@@ -37,13 +40,17 @@ const CTASection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="gradient-accent text-primary-foreground font-medium px-8 h-12 text-base shadow-glow">
-              Request a Demo
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button asChild size="lg" className="gradient-accent text-primary-foreground font-medium px-8 h-12 text-base shadow-glow">
+              <a href={DEMO_URL}>
+                Request a Demo
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
-            <Button variant="outline" size="lg" className="border-border hover:bg-secondary h-12 px-8 text-base">
-              <MessageSquare className="mr-2 h-4 w-4" />
-              Talk to an Audit Specialist
+            <Button asChild variant="outline" size="lg" className="border-border hover:bg-secondary h-12 px-8 text-base">
+              <a href={SPECIALIST_URL}>
+                <MessageSquare className="mr-2 h-4 w-4" />
+                Talk to an Audit Specialist
+              </a>
             </Button>
           </motion.div>
         </motion.div>
