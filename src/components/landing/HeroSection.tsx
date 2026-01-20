@@ -28,27 +28,6 @@ const DataStreamVisual = () => {
           }}
         />
       ))}
-
-      {/* Floating data nodes */}
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={`node-${i}`}
-          className="absolute w-2 h-2 rounded-full bg-primary/30"
-          style={{
-            top: `${Math.random() * 60 + 20}%`,
-            left: `${Math.random() * 80 + 10}%`,
-          }}
-          animate={{
-            opacity: [0.2, 0.6, 0.2],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 3,
-            delay: i * 0.4,
-            repeat: Infinity,
-          }}
-        />
-      ))}
     </div>
   );
 };
